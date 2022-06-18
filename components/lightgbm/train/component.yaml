@@ -29,10 +29,10 @@ inputs:
   description: "Number of evaluate metrics"
   type: String
 outputs:
-- name: output_model_path
+- name: model_path
   description: "GCS path of trained model"
   type: Model
-- name: output_model_metadata_path
+- name: model_metadata_path
   description: "GCS path of model metadata"
   type: Artifact
 implementation:

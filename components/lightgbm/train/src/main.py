@@ -15,8 +15,8 @@ def main(
   group_record_cols,
   eval_metric,
   eval_at,
-  model_output_path,
-  model_output_metadata_path,
+  model_path,
+  model_metadata_path,
 ):
 
   if data_file_format == "csv":
@@ -61,7 +61,7 @@ def main(
     eval_group=[valid_group],
     )
 
-  with open(model_output_path, 'wb') as f:
+  with open(model_path, 'wb') as f:
     pickle.dump(model, f)
 
 if __name__ == "__main__":
