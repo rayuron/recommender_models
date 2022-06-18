@@ -16,6 +16,10 @@ def main(
   eval_metric,
   eval_at,
   model_output_path,
+<<<<<<< Updated upstream
+=======
+  model_output_metadata_path,
+>>>>>>> Stashed changes
 ):
 
   if data_file_format == "csv":

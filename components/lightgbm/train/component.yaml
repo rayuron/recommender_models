@@ -1,0 +1,65 @@
+name: LightGBM Ranker to train
+description: LightGBM Ranker to train
+inputs:
+- name: train_data_path
+  description: "GCS path of train data"
+  type: String
+- name: valid_data_path
+  description: "GCS path of valid data"
+  type: String
+- name: data_file_format
+  description: "File format of train and valid data e.g.csv"
+  type: String
+- name: feature_cols
+  description: "Feature columns"
+  type: String ## List
+- name: sample_weight_cols
+  description: "sample weight column"
+  type: String ## List
+- name: target_col
+  description: "target column"
+  type: String
+- name: group_record_cols
+  description: "group record columns"
+  type: String ## List
+- name: eval_metric
+  description: "Evaluate metrics ref.https://lightgbm.readthedocs.io/en/latest/Parameters.html?highlight=metric#metric-parameters"
+  type: String
+- name: eval_at
+  description: "Number of evaluate metrics"
+  type: String
+outputs:
+- name: output_model_path
+  description: "GCS path of trained model"
+  type: Model
+- name: output_model_metadata_path
+  description: "GCS path of model metadata"
+  type: Artifact
+implementation:
+  container:
+    image: ${container_path}
+    command: [
+    python, ./src/main.py,
+    --train_data_path,
+    {inputPath: train_data_path},
+    --valid_data_path,
+    {inputPath: valid_data_path},
+    --data_file_format,
+    {inputValue: data_file_format},
+    --feature_cols,
+    {inputValue: feature_cols},
+    --sample_weight_cols,
+    {inputValue: sample_weight_cols},
+    --target_col,
+    {inputValue: target_col},
+    --group_record_cols,
+    {inputValue: group_record_cols},
+    --eval_metric,
+    {inputValue: eval_metric},
+    --eval_at,
+    {inputValue: eval_at},
+    --model_path,
+    {outputPath: model_path},
+    --model_metadata_path,
+    {outputPath: model_metadata_path},
+    ]
